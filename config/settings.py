@@ -25,7 +25,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 
 DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = ["*"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -39,6 +40,8 @@ DEBUG = True
 # Application definition
 
 CUSTOM_APPS = [
+    "apps.commons.apps.CommonsConfig",
+    "apps.posts.apps.PostsConfig",
 ]
 
 THIRD_PARTY_APPS = [
