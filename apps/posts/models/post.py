@@ -13,6 +13,7 @@ class Post(CommonModel):
 
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=120)
+    thumbnail = models.CharField(null=True, blank=True)
     content = models.TextField()
 
     is_public = models.BooleanField(default=True)
