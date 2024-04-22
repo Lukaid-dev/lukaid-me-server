@@ -10,6 +10,7 @@ class PostGetSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
+            "thumbnail",
             "content",
             "created_at",
             "updated_at",
