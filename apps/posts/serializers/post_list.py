@@ -14,7 +14,7 @@ class PostListGetSerializer(serializers.ModelSerializer):
             "title",
             "thumbnail",
             "content_summary",
-            "updated_at",
+            "written_at",
             "is_pinned",
         )
 

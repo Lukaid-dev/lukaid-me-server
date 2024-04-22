@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from apps.commons.models.common_model import CommonModel
 
@@ -15,6 +16,9 @@ class Post(CommonModel):
     title = models.CharField(max_length=120)
     thumbnail = models.CharField(null=True, blank=True)
     content = models.TextField()
+    written_at = models.DateTimeField(
+        default=datetime.datetime.now(), null=True, blank=True
+    )
 
     is_public = models.BooleanField(default=True)
     is_pinned = models.BooleanField(default=False)

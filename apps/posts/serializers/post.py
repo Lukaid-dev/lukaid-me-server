@@ -12,8 +12,7 @@ class PostGetSerializer(serializers.ModelSerializer):
             "title",
             "thumbnail",
             "content",
-            "created_at",
-            "updated_at",
+            "written_at",
             "is_public",
             "is_pinned",
         )

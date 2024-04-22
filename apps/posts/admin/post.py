@@ -37,6 +37,7 @@ class PostAdmin(admin.ModelAdmin):
             "Date Option",
             {
                 "fields": (
+                    "written_at",
                     "created_at",
                     "updated_at",
                 ),
