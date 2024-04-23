@@ -12,7 +12,7 @@ services:
       - static_volume:/usr/src/lukaid-me-server/staticfiles/
     depends_on:
       - django_prod
-      - db_prod
+      - database_prod
     networks:
       - prod
 
@@ -28,12 +28,12 @@ services:
       - ${DJANGO_PORT}
     env_file: ${ENVFILE}
     depends_on:
-      - db_prod
+      - database_prod
     networks:
       - prod
 
-  db_prod:
-    container_name: db_prod
+  database_prod:
+    container_name: database_prod
     image: postgres:16.2-alpine
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data_prod/
