@@ -10,6 +10,9 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/settings.conf:/etc/nginx/settings.conf
       - static_volume:/usr/src/lukaid-me-server/staticfiles/
+    environment:
+      - DJANGO_PORT=${DJANGO_PORT}
+      - ENTRY_PORT=${ENTRY_PORT}
     depends_on:
       - lm-django-prod
       - lm-database-prod
