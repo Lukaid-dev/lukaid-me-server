@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  nginx_prod:
-    container_name: nginx
+  LM_nginx_prod:
+    container_name: LM_nginx_prod
     build: ./nginx
     ports:
       - ${ENTRY_PORT}:${ENTRY_PORT}
@@ -11,13 +11,13 @@ services:
       - ./nginx/settings.conf:/etc/nginx/settings.conf
       - static_volume:/usr/src/lukaid-me-server/staticfiles/
     depends_on:
-      - django_prod
-      - database_prod
+      - LM_django_prod
+      - LM_database_prod
     networks:
       - prod
 
-  django_prod:
-    container_name: django_prod
+  LM_django_prod:
+    container_name: LM_django_prod
     build:
       context: .
       dockerfile: ${DOCKERFILE}
@@ -28,12 +28,12 @@ services:
       - ${DJANGO_PORT}
     env_file: ${ENVFILE}
     depends_on:
-      - database_prod
+      - LM_database_prod
     networks:
       - prod
 
-  database_prod:
-    container_name: database_prod
+  LM_database_prod:
+    container_name: LM_database_prod
     image: postgres:16.2-alpine
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data_prod/
