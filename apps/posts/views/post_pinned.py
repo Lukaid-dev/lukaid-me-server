@@ -3,22 +3,21 @@ from rest_framework.response import Response
 
 from drf_yasg.utils import swagger_auto_schema
 
-from apps.posts.models import Post
 from apps.posts.serializers import (
-    PostListGetSerializer,
+    PostPinnedGetSerializer,
 )
+from apps.posts.models import Post
 
 
-class PostList(APIView):
+class PostPinned(APIView):
 
     @swagger_auto_schema(
         operation_description="""
-        # Get posts
-        ## 우선은 모든 post
+        Get all pinned posts.
         """,
     )
     def get(self, request):
-        queryset = Post.objects.filter(is_deleted=False)
+        queryset = Post.objects.filter(is_deleted=False, is_pinned=True, is_public=True)
         queryset = queryset.order_by("-written_at")
-        serializer = PostListGetSerializer(queryset, many=True)
+        serializer = PostPinnedGetSerializer(queryset, many=True)
         return Response(serializer.data)
