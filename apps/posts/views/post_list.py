@@ -18,7 +18,7 @@ class PostList(APIView):
         """,
     )
     def get(self, request):
-        queryset = Post.objects.filter(is_deleted=False)
+        queryset = Post.objects.filter(is_deleted=False, is_public=True)
         queryset = queryset.order_by("-written_at")
         serializer = PostListGetSerializer(queryset, many=True)
         return Response(serializer.data)

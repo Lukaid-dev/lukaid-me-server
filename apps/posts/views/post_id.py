@@ -40,6 +40,9 @@ class PostId(APIView):
     def get(self, request, pk, format=None):
         post = self.get_object(pk)
 
+        if post.is_public is False:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
         serializer = PostGetSerializer(
             post,
             context={"request": request},

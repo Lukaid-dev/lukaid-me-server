@@ -19,7 +19,7 @@ class Posts(APIView):
         """,
     )
     def get(self, request):
-        queryset = Post.objects.filter(is_deleted=False)
+        queryset = Post.objects.filter(is_deleted=False, is_public=True)
         queryset = queryset.order_by("-updated_at")
         serializer = PostGetSerializer(queryset, many=True)
         return Response(serializer.data)
