@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
 from apps.posts.models import Post
-from utils.extract_plain_text import extract_plain_text
 
 
-class PostListGetSerializer(serializers.ModelSerializer):
-    content_summary = serializers.SerializerMethodField()
+class PostIdGetSerializer(serializers.ModelSerializer):
+
+    author = serializers.CharField(source="author.username")
     tag_list = serializers.SerializerMethodField()
 
     class Meta:
@@ -14,15 +14,13 @@ class PostListGetSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "thumbnail",
-            "content_summary",
+            "content",
+            "author",
             "written_at",
+            "is_public",
             "is_pinned",
             "tag_list",
         )
-
-    def get_content_summary(self, obj):
-        plain_text = extract_plain_text(obj.content)
-        return f"{plain_text[:100]}..." if len(plain_text) > 100 else plain_text
 
     def get_tag_list(self, obj):
         return [{"id": tag.id, "name": tag.name} for tag in obj.tags.all()]
