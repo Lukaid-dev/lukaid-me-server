@@ -1,6 +1,6 @@
-from django.utils import timezone
-import django
 from django.db import models
+from django.utils import timezone
+
 from apps.commons.models.common_model import CommonModel
 
 
@@ -25,11 +25,15 @@ class Post(CommonModel):
     is_deleted = models.BooleanField(default=False)
     deleted_at = models.DateTimeField(null=True, blank=True)
 
-    author = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE, related_name="posts", default=1
+    author = models.ForeignKey("users.User", on_delete=models.CASCADE, default=1)
+    category = models.ForeignKey(
+        "Category",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
-    ## TODO: add category field and tag field
+    tags = models.ManyToManyField("Tag", blank=True, through="PostTag")
 
     def __str__(self):
         return self.title

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
+from apps.posts.admin.post_tag_admin_form import PostTagAdminForm
 from apps.posts.models import Post
 
 
@@ -18,6 +19,7 @@ class PostAdmin(admin.ModelAdmin):
             return "No Image"
         return mark_safe(f'<img src="{obj.thumbnail}" style="width: 100px">')
 
+    form = PostTagAdminForm
     fieldsets = (
         (
             "Post",
@@ -30,6 +32,7 @@ class PostAdmin(admin.ModelAdmin):
                     "content",
                     "is_public",
                     "is_pinned",
+                    "category",
                 ),
             },
         ),
@@ -41,6 +44,12 @@ class PostAdmin(admin.ModelAdmin):
                     "created_at",
                     "updated_at",
                 ),
+            },
+        ),
+        (
+            "Tag List",
+            {
+                "fields": ("TagList",),
             },
         ),
         (
