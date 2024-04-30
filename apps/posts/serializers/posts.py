@@ -26,4 +26,10 @@ class PostsGetSerializer(serializers.ModelSerializer):
         return f"{plain_text[:100]}..." if len(plain_text) > 100 else plain_text
 
     def get_tag_list(self, obj):
-        return [{"id": tag.id, "name": tag.name} for tag in obj.tags.all()]
+        return [
+            {
+                "name": post_tag.tag.name,
+                "order": post_tag.order,
+            }
+            for post_tag in obj.post_tags.all()
+        ]
