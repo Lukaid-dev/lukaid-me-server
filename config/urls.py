@@ -46,5 +46,6 @@ urlpatterns += [
 ]
 
 urlpatterns += [
+    path("api/v1/a_test/", include("apps.commons.urls")),
     path("api/v1/posts/", include("apps.posts.urls")),
 ]
